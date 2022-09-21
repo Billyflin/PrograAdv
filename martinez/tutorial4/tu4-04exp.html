@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        function rota(n) {
+            if (n === 360) return;
+            var t = document.getElementById('tx01');
+            t.setAttribute('transform', 'rotate(' + n + ' ,90,90)');
+            setTimeout(rota, 5 , n + 1);
+        }
+    </script>
+</head>
+
+<body>
+<h1>Texto con rotación</h1>
+
+<svg id="svg01" width="500" height="200">
+
+    <text id="tx01" x="25" y="20"
+          width="64"
+          height="16"
+          fill="black"
+          transform="rotate(0,25,20)">icc343
+    </text>
+</svg>
+
+<script>
+    rota(-8740);
+</script>
+<p>para acelerar la rotación se reduce el número del transform <br>
+para desacelerar la rotación se aumenta el número del transform<br>
+la función "rota(recibe un parámetro númerico)" que indica el ángulo inicial de rotación hasta llegar a 360, este puede ser negativo <br>
+
+</p>
+</body>
+</html>

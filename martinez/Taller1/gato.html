@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="le_pongo_color.css">
+    <script>
+        let counter = 0
+        let winner_selection = []
+        const pWin =
+            [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]];
+
+        const cuadro_btn = [];
+
+        function cuadros() {
+            cuadro_btn[0] = document.getElementById("button1");
+            cuadro_btn[1] = document.getElementById("button2");
+            cuadro_btn[2] = document.getElementById("button3");
+            cuadro_btn[3] = document.getElementById("button4");
+            cuadro_btn[4] = document.getElementById("button5");
+            cuadro_btn[5] = document.getElementById("button6");
+            cuadro_btn[6] = document.getElementById("button7");
+            cuadro_btn[7] = document.getElementById("button8");
+            cuadro_btn[8] = document.getElementById("button9");
+        }
+
+
+        function is_not_void() {
+            return !cuadro_btn[0].disabled ||
+                !cuadro_btn[1].disabled ||
+                !cuadro_btn[2].disabled ||
+                !cuadro_btn[3].disabled ||
+                !cuadro_btn[4].disabled ||
+                !cuadro_btn[5].disabled ||
+                !cuadro_btn[6].disabled ||
+                !cuadro_btn[7].disabled ||
+                !cuadro_btn[8].disabled
+        }
+
+        function createTable(idDiv) {
+            let table, row, celd, k = 0;
+            table = document.createElement("TABLE");
+            table.id = "tabla"
+            for (let j = 0; j < 3; j++) {
+                row = document.createElement("TR");
+                for (let i = 0; i < 3; i++) {
+                    k += 1;
+                    celd = document.createElement("TD");
+                    const btn = document.createElement('input');
+                    btn.id = 'button' + k
+                    btn.type = "button";
+                    btn.value = '[ ]';
+                    btn.onclick = function btn_click() {
+                        if (btn.value !== 'X' && (counter % 2 !== 0)) {
+                            counter++
+                            btn.value = 'O';
+                        } else if (counter % 2 !== 1) {
+                            counter++
+                            btn.value = 'X';
+                        }
+                        btn.disabled = true
+                        comprobar()
+                    };
+                    celd.appendChild(btn);
+                    row.appendChild(celd);
+                }
+                table.appendChild(row)
+            }
+            document.getElementById(idDiv).innerHTML = "";
+            document.getElementById(idDiv).appendChild(table)
+            btn = document.getElementById("reset");
+            btn.onclick = function reset_onclick() {
+                if (is_not_void()) {
+                    history_update("Empate X-O -> Rehecha o reinicio")
+                }
+                createTable("aqui")
+                winner_selection = []
+
+            }
+        }
+
+        function history_update(string) {
+            const a = ` ${'\xa0'.repeat(10)} `
+            document.getElementById("mensaje").innerHTML += "<br>" + string + a + a + a + winner_selection;
+
+        }
+
+        function disable_btn() {
+            cuadro_btn.forEach(element => element.disabled = true)
+            pinta_fondos(winner_selection, "green")
+        }
+
+        function pinta_fondos(array1, color) {
+            array1.forEach(e => document.getElementById(e).style.background = color)
+            // document.getElementById("info").innerHTML = winner_selection;
+        }
+
+        function comprobar() {
+            cuadros()
+            for (let j = 0; j < pWin.length; j++) {
+                if (cuadro_btn[pWin[j][0]].value === 'X' && cuadro_btn[pWin[j][1]].value === "X" && cuadro_btn[pWin[j][2]].value === "X") {
+                    winner_selection = [cuadro_btn[pWin[j][0]].id, cuadro_btn[pWin[j][1]].id, cuadro_btn[pWin[j][2]].id]
+                    document.getElementById("info2").innerHTML = "Ganó X";
+                    history_update("Ganó X")
+                    document.getElementById("reset").hidden = false;
+                    disable_btn()
+                } else if (cuadro_btn[pWin[j][0]].value === 'O' && cuadro_btn[pWin[j][1]].value === "O" && cuadro_btn[pWin[j][2]].value === "O") {
+                    winner_selection = [cuadro_btn[pWin[j][0]].id, cuadro_btn[pWin[j][1]].id, cuadro_btn[pWin[j][2]].id]
+                    document.getElementById("info2").innerHTML = "Ganó O";
+                    history_update("Ganó O")
+                    document.getElementById("reset").hidden = false;
+                    disable_btn()
+                }
+            }
+            if (
+                cuadro_btn[0].value !== '[ ]' &&
+                cuadro_btn[1].value !== '[ ]' &&
+                cuadro_btn[2].value !== '[ ]' &&
+                cuadro_btn[3].value !== '[ ]' &&
+                cuadro_btn[4].value !== '[ ]' &&
+                cuadro_btn[5].value !== '[ ]' &&
+                cuadro_btn[6].value !== '[ ]' &&
+                cuadro_btn[7].value !== '[ ]' &&
+                cuadro_btn[8].value !== '[ ]'
+            ) {
+                winner_selection = []
+                history_update("Empate")
+                document.getElementById("info2").innerHTML = "Empate";
+                document.getElementById("reset").hidden = false;
+            }
+        }
+
+        function swith_history() {
+            let mensaje = document.getElementById("mensaje");
+            if (mensaje.style.visibility === 'hidden'
+            ) {
+                mensaje.style.visibility = 'visible'
+            } else {
+                mensaje.style.visibility = 'hidden'
+            }
+        }
+
+    </script>
+</head>
+<body style="text-align: center">
+
+<a id="aqui" style="alignment: center"></a>
+<div id="info2" style="text-align: start" class="winer"></div>
+<button onclick=swith_history()>Ocultar el Historial</button>
+
+<button id="reset" hidden>Reset</button>
+<script>createTable("aqui");
+</script>
+<div id="info" style="text-align: start"></div>
+<H1 style="text-align: start"> Historial</h1>
+<div id="mensaje" style="content: close-quote"></div>
+
+
+</body>
+</html>

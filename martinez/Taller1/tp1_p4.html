@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link  rel="stylesheet" type="text/css" href="le_pongo_color.css">
+    <script>
+        let counter = 0
+        let winner_selection=[]
+        const pWin =
+            [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]];
+
+        const cuadro_btn= [];
+
+        function cuadros(){
+        cuadro_btn[0]=document.getElementById("button1");
+        cuadro_btn[1]=document.getElementById("button2");
+        cuadro_btn[2]=document.getElementById("button3");
+        cuadro_btn[3]=document.getElementById("button4");
+        cuadro_btn[4]=document.getElementById("button5");
+        cuadro_btn[5]=document.getElementById("button6");
+        cuadro_btn[6]=document.getElementById("button7");
+        cuadro_btn[7]=document.getElementById("button8");
+        cuadro_btn[8]=document.getElementById("button9");
+        }
+
+
+        function createTable(idDiv) {
+            let table, row, celd, k = 0;
+            table = document.createElement("TABLE");
+            table.id="tabla"
+            for (let j = 0; j < 3; j++) {
+                row = document.createElement("TR");
+                for (let i = 0; i < 3; i++) {
+                    k += 1;
+                    celd = document.createElement("TD");
+                    const btn = document.createElement('input');
+                    btn.id = 'button' + k
+                    btn.type = "button";
+                    btn.value = '  ';
+                    btn.onclick = function btn_click() {
+                        if (btn.value !== 'X' && (counter % 2 !== 0)) {
+                            counter++
+                            btn.value = 'O';
+                        } else if (counter % 2 !== 1) {
+                            counter++
+                            btn.value = 'X';
+                        }
+                        btn.disabled = true
+                        comprobar()
+                    };
+                    celd.appendChild(btn);
+                    row.appendChild(celd);
+                }
+                table.appendChild(row)
+            }
+            document.getElementById(idDiv).innerHTML = "";
+            document.getElementById(idDiv).appendChild(table)
+        }
+
+        function disable_btn() {
+           cuadro_btn.forEach(element => element.disabled=true)
+            pinta_fondos(winner_selection,"green")
+        }
+        function pinta_fondos(array1,color){
+            array1.forEach(e => document.getElementById(e).style.background=color)
+            document.getElementById("info").innerHTML=winner_selection;
+        }
+        function comprobar() {
+            cuadros()
+            for (let j = 0; j < pWin.length; j++){
+                if(cuadro_btn[pWin[j][0]].value === 'X' && cuadro_btn[pWin[j][1]].value === "X" && cuadro_btn[pWin[j][2]].value === "X" ){
+                    winner_selection=[cuadro_btn[pWin[j][0]].id,cuadro_btn[pWin[j][1]].id,cuadro_btn[pWin[j][2]].id]
+                    document.getElementById("info2").innerHTML="gano X";
+                    document.getElementById("reset").hidden=false;
+                    disable_btn()
+                }
+                else if(cuadro_btn[pWin[j][0]].value === 'O' && cuadro_btn[pWin[j][1]].value === "O" && cuadro_btn[pWin[j][2]].value === "O" ){
+                    winner_selection=[cuadro_btn[pWin[j][0]].id,cuadro_btn[pWin[j][1]].id,cuadro_btn[pWin[j][2]].id]
+                    document.getElementById("info2").innerHTML="gano O";
+                    document.getElementById("reset").hidden=false;
+                    disable_btn()
+                }
+            }
+        }
+
+    </script>
+</head>
+<body style="text-align: center">
+
+<div id="aqui" style="alignment: center"></div>
+<div id="mensaje" style="text-align: start"> Hola</div>
+<button onclick=mensaje.style.visibility='hidden'>Ocultar el div</button>
+
+<button id="reset" onclick=createTable("aqui") hidden>Reset</button>
+<script>createTable("aqui");
+</script>
+<div id="info" style="text-align: start"></div>
+<div id="info2" style="text-align: start" class="winer" ></div>
+
+
+</body>
+</html>

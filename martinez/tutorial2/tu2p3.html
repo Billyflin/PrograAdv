@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial 2 JS</title>
+    <script type="text/javascript" src="class.Conway.js"></script>
+    <script>
+        function proximoPaso(){
+            x.proximoTurno()
+            document.getElementById("grilla").innerHTML="";
+            x.inyectaAmbiente("grilla")
+        }
+    </script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="conway.css">
+<div id="grilla"></div>
+<script>
+    let x = new Conway(20, 20);
+    x.activa(2,3);
+    x.activa(2,4);
+    x.activa(2,5);
+    x.activa(15,15);
+    x.activa(17,15);
+    x.activa(16,15);
+    x.inyectaAmbiente("grilla");
+</script>
+<button onclick="proximoPaso()">Siguiente</button>
+
+</body>
+</html>

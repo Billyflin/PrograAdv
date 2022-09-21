@@ -1,0 +1,19 @@
+button {
+    background-color: aquamarine;
+}
+
+.winer {
+    background-color: lawngreen;
+    animation: infinite;
+    font-size:large;
+}
+
+body {
+    background-image: url("tenor.gif");
+
+}
+
+div {
+    background-color: aquamarine;
+
+}

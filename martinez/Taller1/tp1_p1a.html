@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function createTable(idDiv) {
+            var table, row, celd, k = 0;
+            table = document.createElement("TABLE");
+            for (let j = 0; j < 3; j++) {
+                row = document.createElement("TR");
+                for (let i = 0; i < 3; i++) {
+                    k += 1;
+                    celd = document.createElement("TD");
+                    const btn = document.createElement('input');
+                    btn.id = 'button' + k
+                    btn.type = "button";
+                    btn.value = k;
+                    btn.onclick = function btn_alerts(){
+                        if (btn.innerHTML!==btn.value){
+                            btn.innerText="O"
+                        }else{
+                            btn.innerText="X";
+                        }
+                        alert("hola celda "+btn.value)
+                    };
+                    celd.appendChild(btn);
+                    row.appendChild(celd);
+                }
+                table.appendChild(row)
+            }
+            document.getElementById(idDiv).innerHTML = "";
+            document.getElementById(idDiv).appendChild(table)
+        }
+    </script>
+</head>
+<body style="text-align: center">
+<div id="aqui"></div>
+
+<script>createTable("aqui")</script>
+
+
+</body>
+</html>

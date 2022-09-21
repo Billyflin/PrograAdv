@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Tutorial 1 - Javascript </title>
+    <link rel="stylesheet" type="text/css" href="billy.css">
+    <script>
+        function switch_content() {
+            celda= document.getElementById('ele100');
+            if(celda.innerHTML==='Hola')
+                celda.innerHTML='Chao';
+            else
+                celda.innerHTML='Hola'
+        }
+        function create_table(){
+            var table = document.createElement("TABLE");
+            table.setAttribute("class","mi_tverde");
+            table.border="2px";
+            var fila = document.createElement("TR");
+            var celd = document.createElement("TD");
+            celd.innerHTML="Hola";
+            celd.id ="ele100";
+            fila.appendChild(celd);
+            celd = document.createElement("TD");
+            celd.innerHTML="Mundo";
+            fila.appendChild(celd);
+            celd = document.createElement("TD")
+            celd.innerHTML="Borré el error por inercia XD no lo quiero poner"
+            fila.appendChild(celd);
+            table.appendChild(fila);
+            var b = document.getElementsByTagName("BODY");
+            b[0].appendChild(table);
+        }
+    </script>
+</head>
+<body>
+<h4>Mi Tabla</h4>
+<table border="2px" class="mi_tverde">
+
+    <tr>
+        <td colspan="2">
+            <button type="button" onclick="create_table()">
+                Cambio
+            </button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

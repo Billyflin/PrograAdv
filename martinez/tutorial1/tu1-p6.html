@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial 1 - Javascript </title>
+    <link rel="stylesheet" type="text/css" href="billy.css">
+    <script>
+        function switch_content() {
+            celda= document.getElementById('ele100');
+            if(celda.innerHTML==='Hola')
+                celda.innerHTML='Chao';
+            else
+                celda.innerHTML='Hola'
+        }
+    </script>
+</head>
+<body>
+<h4>Mi Tabla</h4>
+<table border="2px" class="mi_tverde">
+    <tr>
+        <td id="ele100"> Hola</td>
+        <td class="mi_tverde_claro"> Mundo</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button type="button" onclick="switch_content()">
+                Botón Cambio
+            </button>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

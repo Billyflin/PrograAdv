@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tutorial 2 JS</title>
+  <script type="text/javascript" src="class.Conway2.js"></script>
+  <script>
+    function proximoPaso(){
+      x.proximoTurno()
+      document.getElementById("grilla").innerHTML="";
+      x.inyectaAmbiente("grilla")
+    }
+  </script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="conway.css">
+<div id="grilla"></div>
+<script>
+  let x = new Conway(20, 20);
+
+  x.inyectaAmbiente("grilla");
+</script>
+<button onclick="proximoPaso()">Siguiente</button>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial 2 JS</title>
+    <script type="text/javascript" src="class.Conway3.js"></script>
+    <script>
+        function proximoPaso() {
+            x.proximoTurno()
+            document.getElementById("grilla").innerHTML = "";
+            x.inyectaAmbiente("grilla")
+        }
+
+        let ciclos = 1000000;
+
+        function proSigue(milisecs) {
+            if (ciclos > 0) {
+                ciclos--;
+                proximoPaso();
+                setTimeout(proSigue, milisecs, milisecs)
+            }
+        }
+    </script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="conway.css">
+<div id="grilla"></div>
+<script>
+    let x = new Conway(40, 40);
+    x.agregaPatron(0,30, "Planeador");
+    x.agregaPatron(20, 2, "Acorn");
+    x.agregaPatron(6, 6, "pentaDecatlon");
+    x.inyectaAmbiente("grilla");
+    proSigue(200)
+
+</script>
+<button onclick="proximoPaso()">Siguiente</button>
+
+</body>
+</html>

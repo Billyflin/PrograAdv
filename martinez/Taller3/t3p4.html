@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<head>
+    <title>Taller 3 SVG</title>
+    <script>
+        class AranaSVG {
+            constructor(cartesian) {
+                this.ancho = 400;
+
+                this.cartesian = cartesian;
+                this.cartesian.centro = {x:0, y:0};
+
+                this.svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                this.svg.setAttribute("height", this.ancho)
+                this.svg.setAttribute("width", this.ancho * 1.5);
+                this.svg.centro = this.a_svg(this.cartesian.centro);
+                this.svg.puntos = [];
+                this.svg.extremos = [];
+
+                this.calculaPosicionCirculos();
+            }
+
+            a_svg(cartesiana) {
+                return {x: this.ancho/2 + cartesiana.x * this.ancho/2 * 0.9 / this.cartesian.maximo,
+                    y: this.ancho/2 - cartesiana.y * this.ancho/2 * 0.9 / this.cartesian.maximo};
+            }
+
+            muestra() {
+                let area1 = this.crearMarco(this.ancho, this.ancho, 0, 0)
+                this.svg.appendChild(area1);
+
+                let area2 = this.crearMarco(this.ancho * 0.5, this.ancho, this.ancho, 0)
+                this.svg.appendChild(area2);
+
+                let centro = this.crearCirculo(4, this.ancho/2, this.ancho/2, "black");
+                this.svg.appendChild(centro);
+
+                for (let i = 0; i < this.svg.extremos.length; i++) {
+                    let extremo = this.crearCirculo(6, this.svg.extremos[i].x, this.svg.extremos[i].y, this.cartesian.colores[i])
+                    this.svg.appendChild(extremo);
+                }
+
+                for (let i = 0; i < this.svg.puntos.length; i++) {
+                    let punto = this.crearCirculo(3, this.svg.puntos[i].x, this.svg.puntos[i].y, "black")
+                    this.svg.appendChild(punto);
+                }
+            }
+
+            crearLinea(inicioX, inicioY, finalX, finalY) {
+                let linea = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                linea.setAttribute("x1", inicioX);
+                linea.setAttribute("y1", inicioY);
+                linea.setAttribute("x2", finalX);
+                linea.setAttribute("y2", finalY);
+                linea.setAttribute("style", "stroke:black");
+                return linea;
+            }
+
+            crearMarco(ancho, alto, x, y) {
+                let marco = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                marco.setAttribute("width", ancho);
+                marco.setAttribute("height", alto);
+                marco.setAttribute("x", x);
+                marco.setAttribute("y", y);
+                marco.setAttribute("style", "fill:white;stroke:black");
+                return marco;
+            }
+
+            crearCirculo(radio, cx, cy, color) {
+                let circulo = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circulo.setAttribute("r", radio);
+                circulo.setAttribute("cx", cx);
+                circulo.setAttribute("cy", cy);
+                circulo.setAttribute("fill", color);
+                return circulo;
+            }
+
+            calculaPosicionCirculos() {
+                let cantidad = this.cartesian.datos.length;
+                let divisiones = this.dividirCirculo(cantidad);
+
+                for (let i = 0; i < cantidad; i++) {
+                    let polar = {r: this.cartesian.datos[i],
+                        theta: divisiones[i]};
+                    let cartesian = this.a_cartesiana(polar);
+                    let svg = this.a_svg(cartesian);
+
+                    this.svg.puntos.push(svg);
+                }
+
+                for (let i = 0; i < cantidad; i++) {
+                    let polar = {r: this.cartesian.maximo,
+                        theta: divisiones[i]};
+                    let cartesian = this.a_cartesiana(polar);
+                    let svg = this.a_svg(cartesian);
+
+                    this.svg.extremos.push(svg);
+                }
+            }
+
+            dividirCirculo(partes) {
+                let grados = [];
+
+                for (let i = 0; i < partes; i++) {
+                    grados.push(45 + (i / partes) * 360);
+                }
+
+                return grados;
+            }
+
+            a_cartesiana(polar) {
+                return {x: polar.r * this.coseno(polar.theta),
+                    y: polar.r * this.seno(polar.theta)};
+            }
+
+            seno(grados) {
+                return Math.sin(grados * Math.PI / 180)
+            }
+
+            coseno(grados) {
+                return Math.cos(grados * Math.PI / 180)
+            }
+            inyectaEtiquetas() {
+                let posicion = 20;
+
+                // Añade las etiquetas
+                for (let i = 0; i < this.svg.extremos.length; i++) {
+                    let circulo = this.crearCirculo(6, this.ancho + 20, posicion, this.cartesian.colores[i]);
+                    this.svg.appendChild(circulo);
+
+                    let etiqueta = this.crearTexto(this.ancho + 35, posicion + 5, this.cartesian.etiquetas[i]);
+                    this.svg.appendChild(etiqueta);
+
+                    posicion += 30;
+                }
+            }
+
+            crearTexto(x, y, contenido) {
+                let texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                texto.innerHTML = contenido;
+                texto.setAttribute("x", x);
+                texto.setAttribute("y", y);
+                texto.setAttribute("fill", "black");
+                return texto;
+            }
+
+        }
+
+        function datosParaArana(tx) {
+            let objd = document.getElementById(tx);
+            str = objd.value.replace(/(\r\n|\n|\r|\s)/gm, "");
+
+            let texto = str.split(";");
+            texto.splice(-1, 1);
+
+            let obj = {tipo:"araña"};
+            let linea = 0;
+
+            for (lin of texto) {
+                console.log("linea " + linea + ": " + lin);
+
+                let sep = lin.split("=");
+                if (sep.length === 2) {
+                    obj[sep[0]] = sep[1].split(",");
+                }
+                else {
+                    console.log("error en línea " + linea);
+                }
+                linea++;
+            }
+
+            console.log(JSON.stringify(obj));
+
+            let graf = new AranaSVG(obj);
+            console.log(JSON.stringify(graf.cartesian));
+            graf.muestra();
+            graf.inyectaEtiquetas();
+            console.log(JSON.stringify(graf.svg));
+
+            inyectarSVG("grafico", graf.svg)
+        }
+
+        function inyectarSVG(div, svg) {
+            let grafico = document.getElementById(div);
+            grafico.innerHTML="";
+            grafico.appendChild(svg);
+        }
+    </script>
+</head>
+<body>
+<h4>Ejemplo Graficacion Araña</h4>
+<table>
+    <tr>
+        <td>
+          <textarea id="tx_" rows="6" cols="40">
+maximo=100;
+datos=90,30,70,50,45,10;
+colores=#909033, green,orange,red,blue,green;
+etiquetas=TP-1,TP-2,TP-3;
+        </textarea>
+            <br>
+            <button onclick="datosParaArana('tx_')">Crea Gráfico</button>
+        </td>
+        <td>
+
+            <div id="grafico">
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

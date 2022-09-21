@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tutorial 2 JS</title>
+    <script type="text/javascript" src="AmbienteConway.js"></script>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="conway.css">
+<div id="grilla"></div>
+<script>
+    let x = new AmbienteConway(8, 8);
+    x.activa(0,0);
+    x.activa(0,1);
+    x.activa(1,0);
+    x.activa(1,1);
+    x.activa(7,7);
+    x.activa(6,7);
+    x.activa(6,6);
+    x.activa(7,6);
+    x.inyectaAmbiente("grilla");
+</script>
+
+</body>
+</html>

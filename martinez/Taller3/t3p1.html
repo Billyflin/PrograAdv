@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<head>
+    <title>Taller 3 SVG</title>
+    <script>
+        class AranaSVG {
+            constructor(dato) {
+            }
+        }
+
+        function datosParaArana(tx) {
+            var obj = document.getElementById(tx);
+            str = obj.innerHTML.replace(/(\r\n|\n|\r|\s)/gm, "");
+            var texto = str.split(";");
+            texto.splice(-1, 1);
+            var obj = {tipo: "araña"}, linea = 0;
+            for (lin of texto) {
+                console.log("linea " + linea + "; " + lin);
+                var sep = lin.split("=");
+                if (sep.length === 2) {
+                    obj[sep[0]] = sep[1].split(",");
+                } else {
+                    console.log("error en línea " + linea);
+                }
+                linea++;
+            }
+            console.log(JSON.stringify(obj));
+        }
+    </script>
+</head>
+<body>
+<h4>Ejemplo Graficacion Araña</h4>
+<table>
+    <tr>
+        <td>
+            <textarea id="tx_" rows="6" cols="40">
+maximo=100;
+datos=90,30,70;
+colores=#909033, green,orange;
+etiquetas=TP-1,TP-2,TP-3;
+        </textarea>
+            <br>
+            <button onclick="datosParaArana('tx_')">Crea Gráfico</button>
+
+            <div id="grafico"></div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

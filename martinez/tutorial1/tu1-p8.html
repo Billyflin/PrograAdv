@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Tutorial 1 - Javascript </title>
+    <link rel="stylesheet" type="text/css" href="billy.css">
+    <script>
+        var col = ["#339090", "#6090aa", "#80bb40"]
+
+        function generateColorTable(idDiv, ColorList) {
+            var table, row, celd, i;
+            table = document.createElement("TABLE");
+            table.setAttribute("class", "mi_tverde");
+            for (i = 0; i < ColorList.length; i++) {
+                row = document.createElement("TR");
+                celd = document.createElement("TD");
+                celd.innerHTML = ColorList[i];
+                row.appendChild(celd);
+                celd = document.createElement("TD");
+                celd.innerHTML = '[   ]';
+                celd.style = 'background-color:' + ColorList[i];
+                row.appendChild(celd);
+                table.appendChild(row)
+
+
+            }
+            document.getElementById(idDiv).innerHTML = "";
+            document.getElementById(idDiv).appendChild(table)
+
+        }
+        function addColor(){
+            var valor = document.getElementById("newColor").value;
+            col.push(valor);
+            generateColorTable("aqui",col)
+
+        }
+    </script>
+</head>
+    <body>
+        <h4>Mi Tabla</h4>
+        <div id="aqui"></div>
+        <script>generateColorTable("aqui",col)</script>
+        <br>
+        Otro Color: <input type="text" id="newColor">
+        <button onclick="addColor()">Agregar</button>
+    </body>
+</html>
