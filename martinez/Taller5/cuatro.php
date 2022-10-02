@@ -13,7 +13,7 @@ $col = $_GET['col'] + 1;
 
 function get($color, $row, $col): void
 {
-    $gradiente = 20 / $row;
+    $grad = 20 / $row;
     $deg = $color - 12;
     $light = 100 / $col;
     echo "<table  cellpadding='0' cellspacing='1px' >";
@@ -21,16 +21,16 @@ function get($color, $row, $col): void
         echo "<tr>";
         for ($i = 0; $i < $row; $i++) {
             $l = $light * $j;
-            $hsl = "hsl(" . ($deg + ($gradiente * $i)) . ", 100%, $l%)";
+            $hsl = "hsl(" . ($deg + ($grad * $i)) . ", 100%, $l%)";
             if ($l < 95 && $l > 7) {
-                $color_hex= hslToHex(($deg + ($gradiente * $i)), 100, $l);
+                $color_hex= hslToHex(($deg + ($grad * $i)), 100, $l);
                 echo "<td onclick="."alert(id)"." id='$color_hex' style='background-color: $hsl; width: 50px; height: 50px; '></td>";
             }
         }
     }
 }
 
-// Funcion para convertir de HSL a HEX
+// Funcion para convertir de HSL a HEX de https://pastebin.com/raw/3xKsi7SD
 
 function degPercPercToHsl($h, $s, $l) {
 	//convert h, s, and l back to the 0-1 range
