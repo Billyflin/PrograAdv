@@ -8,12 +8,12 @@
 
 $color = $_GET['color'];
 $row = $_GET['row'];
-$col = $_GET['col'];
+$col = $_GET['col']+1;
 
 
 function get($color, $row, $col): void
 {
-    $gradiente = 30 / $row;
+    $gradiente = 20 / $row;
     $deg = $color - 12;
     $light = 100 / $col;
     echo "<table  cellpadding='0' cellspacing='1px' >";
