@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <form name="formtest" method="GET" action="tp6p1.php">
+        <table border="0">
+  
+          <tr>
+              <td><input type="hidden" name="ancho" id = "ancho" value="1000"></td>
+          </tr>
+          
+            <tr>
+            <td><input type="hidden" name="alto" id = "alto" value="700"></td>
+          </tr>
+          
+          <tr>
+            <td><input type="hidden" name="diametro" id = "diametro" value="10"></td>
+          </tr>
+
+          <tr>
+            <td>Contagiados</td>
+            <td><input type="number" name="contagiados" id = "contagiados" min="1" /></td>
+          </tr>
+  
+          <tr>
+            <td>Densidad Poblacional</td>
+            <td><input type="number" name="densidad" id = "densidad" min="0" max="100" /></td>
+          </tr>
+  
+          <tr>
+            <td><input type="submit" value="Enviar" /></td>
+          </tr>
+  
+        </table>
+      </form>
+</body>
+</html>
