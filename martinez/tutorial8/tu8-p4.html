@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial 8</title>
+  <link rel="stylesheet" type = "text/css" href="x3dom/x3dom.css"/>
+  <script type="text/javascript" src="x3dom/x3dom.js"></script>
+</head>
+<body>
+<div id = 'x3dSection'>
+  <x3d width = "400" height = "300">
+    <scene>
+      <transform translation="0 1 0" scale="1 1 1">
+        <shape def="cono">
+          <appearance>
+            <material diffuseColor="0.8 0.8 1.2">
+            </material>
+          </appearance>
+          <cone></cone>
+        </shape>
+      </transform>
+
+      <transform translation="0 2 0" scale="0.75 0.75 0.75">
+        <shape use="cono"/>
+      </transform>
+
+      <transform translation="0 3 0" scale="0.5 0.5 0.5">
+        <shape use="cono"/>
+      </transform>
+
+      <transform translation="0 3.7 0" scale="0.25 0.25 0.25">
+        <shape use="cono"/>
+      </transform>
+
+      <transform translation="5 1 0" scale="1 1 1">
+        <shape def="caja">
+          <appearance>
+            <material diffuseColor="0.8 0.8 1.2">
+            </material>
+          </appearance>
+          <box></box>
+        </shape>
+      </transform>
+
+      <transform translation="5 2 0" scale="0.75 0.75 0.75">
+        <shape use="caja"/>
+      </transform>
+
+      <transform translation="5 3 0" scale="0.5 0.5 0.5">
+        <shape use="caja"/>
+      </transform>
+
+      <transform translation="5 3.7 0" scale="0.25 0.25 0.25">
+        <shape use="caja"/>
+      </transform>
+    </scene>
+  </x3d>
+</div>
+</body>
+</html>

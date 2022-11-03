@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutorial 8</title>
+  <link rel="stylesheet" type = "text/css" href="x3dom/x3dom.css"/>
+  <script type="text/javascript" src="x3dom/x3dom.js"></script>
+</head>
+<body>
+<div id = 'x3dSection'>
+  <x3d width = "400" height = "300">
+    <scene>
+      <shape>
+        <appearance>
+          <material diffuseColor="red">
+          </material>
+        </appearance>
+        <box></box>
+      </shape>
+      <shape>
+        <appearance>
+          <material diffuseColor="blue">
+          </material>
+        </appearance>
+        <cone height = "5"></cone>
+      </shape>
+      <transform translation="0 5 0">
+        <shape>
+          <appearance>
+            <material diffuseColor="yellow">
+            </material>
+          </appearance>
+          <box></box>
+        </shape>
+      </transform>
+      <transform translation="0 5 0" rotation="0 0 1 3.1415">
+        <shape>
+          <appearance>
+            <material diffuseColor="green">
+            </material>
+          </appearance>
+          <cone height = "5"></cone>
+        </shape>
+      </transform>
+    </scene>
+  </x3d>
+</div>
+</body>
+</html>
