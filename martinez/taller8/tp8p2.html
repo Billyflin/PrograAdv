@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 8</title>
+    <link rel="stylesheet" type="text/css" href='https://www.x3dom.org/download/x3dom.css'/>
+    <script type="text/javascript" src='https://www.x3dom.org/download/x3dom.js'></script>
+</head>
+
+<!--
+CastleEncoded_Material_Material$46$007
+CastleEncoded_Material_Material$46$007
+CastleEncoded_Material_Material$46$005
+-->
+<body>
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function ColorRandom() {
+        while (true) {
+            await sleep(1000);
+            const randomBetween = (min, max) => min + (Math.random() * (max - min));
+            const r = randomBetween(0, 1);
+            const g = randomBetween(0, 1);
+            const b = randomBetween(0, 1);
+            // alert(r + " " + g + " " + b);
+            document.getElementById('monitor1__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+            document.getElementById('monitor2__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+            document.getElementById('monitor3__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+            document.getElementById('monitor4__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+        }
+    }
+
+    ColorRandom();
+</script>
+<h3>Profe recargue la pag en el navegador para que funcione el color aleatorio de los monitores, se que pidio un tamaño de pantalla pero usé la
+    libreria nueva y las etiquetas de tamaño no funcionan en esta pero la anterior si, preferí quedarme con esta por el
+    tiempo de renderizado</h3>
+</h3>
+<x3d width="1000" height="700">
+    <scene>
+        <transform translation="-8 0 4" rotation="0 1 0 1.57075">
+            <!--            monitor1__MA_Material_005-->
+            <inline nameSpaceName="monitor1" url="modeloMonitor/monitor1.x3d" mapDEFToID="true"></inline>
+        </transform>
+        <transform translation="8 0 4" rotation="0 -1 0 1.57075">
+            <inline nameSpaceName="monitor2" url="modeloMonitor/monitor2.x3d" mapDEFToID="true"></inline>
+        </transform>
+        <transform translation="0 0 12" rotation="0 1 0 3.1415">
+            <inline nameSpaceName="monitor3" url="modeloMonitor/monitor3.x3d" mapDEFToID="true"></inline>
+        </transform>
+        <transform translation="0 0 -4">
+            <inline nameSpaceName="monitor4" url="modeloMonitor/monitor4.x3d" mapDEFToID="true"></inline>
+        </transform>
+
+
+        <!--    <inline url="modeloMonitor/monitor1.x3d" mapDEFToID="true" > </inline>-->
+
+        <Viewpoint position='0,0,40'></Viewpoint>
+        <shape>
+            <appearance>
+                <material></material>
+                <ImageTexture url='https://i0.wp.com/vinotecalacristaleria.es/wp-content/uploads/2014/03/madera.png'/>
+            </appearance>
+            <box solid='true' size='30 0.2 40'></box>
+        </shape>
+    </scene>
+
+</x3d>
+</body>
+</html>

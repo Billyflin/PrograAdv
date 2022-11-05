@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutorial 8</title>
-  <link rel="stylesheet" type = "text/css" href="x3dom/x3dom.css"/>
-  <script type="text/javascript" src="x3dom/x3dom.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 8</title>
+    <link rel="stylesheet" type="text/css" href='https://www.x3dom.org/download/x3dom.css'/>
+    <script type="text/javascript" src='https://www.x3dom.org/download/x3dom.js'></script>
 </head>
+
+<!--
+CastleEncoded_Material_Material$46$007
+CastleEncoded_Material_Material$46$007
+CastleEncoded_Material_Material$46$005
+-->
 <body>
-<x3d width='500px' height='400px'>
-  <scene>
-    <inline url="modeloMonitor/ex/monitor1.x3d" mapDEFToID="true" > </inline>
-  </scene>
+
+<script>
+    function redNose() {
+        alert(document.getElementById('monitor__WO_World').getAttribute('skyColor'));
+
+    }
+</script>
+
+<x3d width="1000" height="700">
+    <scene>
+        <inline nameSpaceName="monitor" onclick='redNose()' url="modeloMonitor/monitor.x3d" mapDEFToID="true"></inline>
+
+    </scene>
 </x3d>
 </body>
 </html>

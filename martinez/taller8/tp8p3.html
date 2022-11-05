@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 8</title>
+    <link rel="stylesheet" type="text/css" href='https://www.x3dom.org/download/x3dom.css'/>
+    <script type="text/javascript" src='https://www.x3dom.org/download/x3dom.js'></script>
+</head>
+
+<!--
+CastleEncoded_Material_Material$46$007
+CastleEncoded_Material_Material$46$007
+CastleEncoded_Material_Material$46$005
+-->
+<body>
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function ColorRandom() {
+        while (true) {
+            await sleep(1000);
+            const randomBetween = (min, max) => min + (Math.random() * (max - min));
+            const r = randomBetween(0, 1);
+            const g = randomBetween(0, 1);
+            const b = randomBetween(0, 1);
+            // alert(r + " " + g + " " + b);
+            document.getElementById('monitor1__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+            document.getElementById('monitor2__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+            document.getElementById('monitor3__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+            document.getElementById('monitor4__MA_Material_005').setAttribute('diffuseColor', `${r} ${g} ${b}`);
+        }
+    }
+
+    ColorRandom();
+</script>
+<x3d width="1000" height="700">
+    <scene>
+        <transform scale="6.5 6.5 6.5 " translation="0 0 -4">
+            <inline nameSpaceName="escenaCuatica" url="modeloCasa/shapespark-example-room.x3d"
+                    mapDEFToID="true"></inline>
+        </transform>
+        <transform translation="8 5 -36 " rotation="0 1 0 3.1415">
+            <!--            monitor1__MA_Material_005-->
+            <inline nameSpaceName="monitor1" url="modeloMonitor/monitor1.x3d" mapDEFToID="true"></inline>
+        </transform>
+        <transform translation="21 2.4 19" rotation="0 -1 0 1.57075">
+            <inline nameSpaceName="monitor2" url="modeloMonitor/monitor2.x3d" mapDEFToID="true" onclick="alert()"></inline>
+<!--            <inline nameSpaceName="monitor2" url="modeloMonitor/monitor2.x3d" mapDEFToID="true" onclick="alert()"></inline>-->
+        </transform>
+        <transform translation="14 4.56 36.5" rotation="0 1 0 3.1415">
+            <inline nameSpaceName="monitor3" url="modeloMonitor/monitor3.x3d" mapDEFToID="true"></inline>
+        </transform>
+        <transform translation="-8.7 4.8 -14">
+            <inline nameSpaceName="monitor4" url="modeloMonitor/monitor4.x3d" mapDEFToID="true"
+                    ></inline>
+        </transform>
+
+
+        <!--    <inline url="modeloMonitor/monitor1.x3d" mapDEFToID="true" > </inline>-->
+
+<!--        <Viewpoint position='0 10 14' rotation="0 0 1 1.2"></Viewpoint>-->
+<!--        <PointLight ambientIntensity='0.8' attenuation='0,0,0' color='1,1,0,8' global='false' intensity='1' location="20 12 20"-->
+<!--                    on='true' radius='100' shadowFilterSize='0' shadowIntensity='0.8'-->
+<!--                    shadowMapSize='1024' shadowOffset='0' zFar='-1' zNear='-1'></PointLight>-->
+
+
+
+
+    </scene>
+
+</x3d>
+</body>
+</html>
